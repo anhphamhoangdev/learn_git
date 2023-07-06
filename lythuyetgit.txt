@@ -1,0 +1,65 @@
+======================== VÀI LỆNH CƠ BẢN ===========================
+
+
+git init : Khởi tạo thư mục git trong folder 
+
+git add <fileName> : đưa file vào staged ( trước khi đưa vào thư mục git ) ( add tất cả thì git add . )
+
+git commit : add vào cơ sở dữ liệu .git
+	git commit -m "<message>"
+
+git log : xem thông tin các commit ( mã commit, tác giả, ngày, message, nhánh )
+
+git log --oneline : tương tự trên nhưng vắn tắt hơn ( <mã commit> <message>, và tên nhánh )
+
+git status : kiểm tra trạng thái các file ( so với commit cuối )
+
+git restore <fileName> : sau khi xoá 1 file, muốn phục hồi lại file đó từ commit cuối thì dùng lệnh này ( phục hồi tất cả thì git restore . )
+
+git diff : sau khi chỉnh sữa file, so sánh sự thay đổi giữa 2 trường hợp ( sẽ có trường hợp a và b )
+	- STAGED có dữ liệu : so sánh thư mục làm việc với STAGED
+	- STAGED KHÔNG có dữ liệu : so sánh thư mục làm việc với commit cuối
+
+git checkout <mã commit> -- <fileName> : phục hồi lại file nào đó từ commit mình muốn thông qua mã commit
+	- sau khi phục hồi file thì file đó đã ở nằm trong vùng staged, nghĩa là chi đợi commit
+	- phục hồi lại về commit cuối thì không cần có mã commit
+
+git restore --staged <file> : đem file đó ra khỏi vùng staged sau khi phục hồi
+
+------------------------------------------------------------------------
+
+
+============================== GIT IGNORE ==============================
+- Mục đích : những file trong đây sẽ không được git theo dõi
+1) tạo file .gitignore
+2) thêm những file cần ignore vào gitignore
+3) đưa gitignore vào staged và commit
+
+* nếu commit thay đổi ít và không muốn tạo ra commit mới => ghi đè lên commit cuối và sửa lại message bằng cách : 
+
+git commit --amend -m "<message>"
+
+------------------------------------------------------------------------
+
+
+
+
+=========================== LỆNH RESET UNDO ======================
+
+git reset : undo commit hoặc staging
+	git reset --soft HEAD~1 : xoá commit cuối, nhưng nội dung không bị xoá hẳn mà chuyển vào vùng staged
+	git reset --hard HEAD~1 : xoá commit cuối, và không đưa nội dung vào staged
+
+git reset --staged <fileName> : đưa các file ra vùng staged
+
+git reset -- <fileName> : sau khi đưa vào vùng staged ( chưa commit ) , ta sửa file đó, muốn nó quay lại là file trong staged thì dùng lệnh này
+
+------------------------------------------------------------------------
+
+
+======================== NHÁNH BRANCH =============================
+
+git branch : xem các nhánh hiện có, mỗi nhánh như 1 cơ sở dữ liệu
+
+
+
