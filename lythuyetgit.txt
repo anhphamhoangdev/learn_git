@@ -59,7 +59,45 @@ git reset -- <fileName> : sau khi đưa vào vùng staged ( chưa commit ) , ta 
 
 ======================== NHÁNH BRANCH =============================
 
-git branch : xem các nhánh hiện có, mỗi nhánh như 1 cơ sở dữ liệu
+khi dùng lệnh git init, sẽ tự động tạo nhánh master
+
+git branch : xem các nhánh hiện có và mình đang ở nhánh nào
+
+git branch <branchName> : tạo ra nhánh mới, sau khi tạo, nhánh mới sẽ trỏ vào commit mà HEAD đang trỏ đến trên nhánh hiện tại.
+
+git checkout <branchName> : chuyển sang nhánh mình muốn => thư mục làm việc sẽ = commit cuối của nhánh vừa chuyển qua
+
+git switch <branchName> : tương tự trên
+
+git merge <branchName> : ví dụ đang ở nhánh master, branchName = tên 1 nhánh khác, sẽ thực hiện việc gộp nhánh đó vào nhánh master
+
+git branch -d <branchName> : xoá nhánh ( thường làm sau khi gộp 2 nhánh )
+
+git log --oneline --graph : xem sơ đồ commit
+
+khi bị conflict, sử dụng :
+
+1) git mergetool
+2) nhấn return để vào vdiff
+3) sử dụng 1 trong 3 lệnh :
+	+ diffg LO (local) : để giữ nội dung sửa đổi của file nhánh hiện tại
+	+ diffg RE (remote) : để giữ nội dung sửa đổi của file muốn gộp vào
+	+ diffg BA (base) : giữ nội dung gốc lúc cả 2 chưa có commit mới ( chưa sửa )
+
+
+* CÁCH GỘP NHÁNH KHÁC * GIT REBASE
+
+- nói 1 cách đơn giản dễ hiểu là : nó sẽ gộp thằng cần gộp vào cái commit đầu tiên khác nhau của nhánh kia
+ví dụ : B1 <- B2
+và có 1 nhánh khác là D1 <- D2
+giờ gộp D1 <- D2 vào B1 <- B2 thì sẽ trở thành D1 <- D2 <- B1' ( buộc phải sửa tên ) <- B2
+
+
+- sử dụng git rebase nếu như muốn các sự thay đổi thuộc về branch của mình luôn luôn là mới nhất
+- sử dụng git merge nếu muốn sắp xếp các commit theo mặc định
+ví dụ : 
+	git checkout main # chuyển sang nhánh main
+	git rebase beta # gộp beta vào main => commit cuối của main là commit cao nhất
 
 
 
